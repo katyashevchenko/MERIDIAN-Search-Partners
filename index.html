@@ -5029,6 +5029,1429 @@ body{
   }
 </style>
 
+<style id="meridian-premium-menu-glow-styles">
+  /* =========================================================
+     PREMIUM MOBILE NAVIGATION
+     Full-height editorial panel, staggered links, morphing icon.
+     ========================================================= */
+  @media (max-width:980px){
+    body.menu-open{overflow:hidden;}
+
+    .nav-toggle{
+      position:relative;
+      z-index:312;
+      width:48px;
+      height:48px;
+      padding:0;
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:50%;
+      background:rgba(9,11,15,.24);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      transition:background 320ms var(--ease), border-color 320ms var(--ease), transform 320ms var(--ease);
+    }
+
+    .nav-toggle:hover{border-color:rgba(200,155,99,.55);}
+    .nav-toggle[aria-expanded="true"]{
+      background:rgba(200,155,99,.12);
+      border-color:rgba(200,155,99,.48);
+      transform:rotate(90deg);
+    }
+
+    .nav-toggle svg{display:none;}
+    .nav-toggle::before,
+    .nav-toggle::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:20px;
+      height:1.5px;
+      border-radius:999px;
+      background:currentColor;
+      transform-origin:center;
+      transition:transform 420ms cubic-bezier(.22,1,.36,1), width 320ms var(--ease);
+    }
+    .nav-toggle::before{transform:translate(-50%,-5px);}
+    .nav-toggle::after{transform:translate(-50%,5px);}
+    .nav-toggle[aria-expanded="true"]::before{transform:translate(-50%,0) rotate(45deg);}
+    .nav-toggle[aria-expanded="true"]::after{transform:translate(-50%,0) rotate(-45deg);}
+
+    .mobile-menu{
+      position:fixed;
+      inset:0;
+      top:0;
+      right:0;
+      z-index:305;
+      width:100%;
+      min-height:100dvh;
+      padding:clamp(118px,16vh,160px) var(--container-padding) 42px;
+      border:0;
+      border-radius:0;
+      background:
+        radial-gradient(circle at 86% 14%, rgba(200,155,99,.20), transparent 34%),
+        linear-gradient(135deg, rgba(9,11,15,.985), rgba(14,18,24,.97));
+      backdrop-filter:blur(24px);
+      -webkit-backdrop-filter:blur(24px);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:flex-start;
+      gap:0;
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+      clip-path:circle(0% at calc(100% - 48px) 42px);
+      transform:none;
+      transition:
+        clip-path 760ms cubic-bezier(.76,0,.24,1),
+        opacity 280ms ease,
+        visibility 0s linear 760ms;
+    }
+
+    .mobile-menu::before{
+      content:"MENU";
+      position:absolute;
+      left:var(--container-padding);
+      top:104px;
+      color:var(--accent);
+      font-family:'IBM Plex Mono',monospace;
+      font-size:11px;
+      letter-spacing:.18em;
+      opacity:0;
+      transform:translateY(10px);
+      transition:opacity 400ms ease 260ms, transform 500ms cubic-bezier(.22,1,.36,1) 260ms;
+    }
+
+    .mobile-menu::after{
+      content:"";
+      position:absolute;
+      inset:auto -12vw -18vh auto;
+      width:52vw;
+      height:52vw;
+      min-width:340px;
+      min-height:340px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(200,155,99,.18), rgba(200,155,99,.04) 45%, transparent 72%);
+      filter:blur(22px);
+      pointer-events:none;
+    }
+
+    .mobile-menu.open{
+      opacity:1;
+      visibility:visible;
+      pointer-events:auto;
+      clip-path:circle(150% at calc(100% - 48px) 42px);
+      transition:
+        clip-path 820ms cubic-bezier(.76,0,.24,1),
+        opacity 240ms ease,
+        visibility 0s linear 0s;
+    }
+
+    .mobile-menu.open::before{opacity:1; transform:translateY(0);}
+
+    .mobile-menu a{
+      position:relative;
+      z-index:2;
+      width:100%;
+      padding:13px 0;
+      border-radius:0;
+      color:#F5F5F4;
+      font-family:'Newsreader',serif;
+      font-size:clamp(36px,7vw,64px);
+      font-weight:400;
+      line-height:1.05;
+      letter-spacing:-.02em;
+      opacity:0;
+      transform:translateY(34px) rotate(1.5deg);
+      transition:
+        opacity 420ms ease,
+        transform 620ms cubic-bezier(.22,1,.36,1),
+        color 250ms var(--ease),
+        padding-left 300ms var(--ease);
+    }
+
+    .mobile-menu a::after{
+      content:"↗";
+      position:absolute;
+      right:0;
+      top:50%;
+      color:var(--accent-hover);
+      font-family:'Inter',sans-serif;
+      font-size:.38em;
+      opacity:0;
+      transform:translate(-12px,-50%);
+      transition:opacity 260ms var(--ease), transform 300ms var(--ease);
+    }
+
+    .mobile-menu a:hover{
+      background:transparent;
+      color:var(--accent-hover);
+      padding-left:12px;
+    }
+    .mobile-menu a:hover::after{opacity:1; transform:translate(0,-50%);}
+
+    .mobile-menu.open a{
+      opacity:1;
+      transform:translateY(0) rotate(0);
+    }
+    .mobile-menu.open a:nth-of-type(1){transition-delay:180ms;}
+    .mobile-menu.open a:nth-of-type(2){transition-delay:230ms;}
+    .mobile-menu.open a:nth-of-type(3){transition-delay:280ms;}
+    .mobile-menu.open a:nth-of-type(4){transition-delay:330ms;}
+    .mobile-menu.open a:nth-of-type(5){transition-delay:380ms;}
+    .mobile-menu.open a:nth-of-type(6){transition-delay:430ms;}
+
+    .mobile-menu .nav-cta{
+      position:relative;
+      z-index:2;
+      width:100%;
+      max-width:360px;
+      min-height:58px;
+      margin-top:32px;
+      opacity:0;
+      transform:translateY(24px);
+      transition:opacity 420ms ease 470ms, transform 620ms cubic-bezier(.22,1,.36,1) 470ms, background 250ms var(--ease);
+    }
+    .mobile-menu.open .nav-cta{opacity:1; transform:translateY(0);}
+  }
+
+  @media (max-width:600px){
+    .mobile-menu{justify-content:flex-start; padding-top:132px;}
+    .mobile-menu a{font-size:clamp(34px,11vw,48px); padding:10px 0;}
+    .mobile-menu .nav-cta{margin-top:24px;}
+  }
+
+  /* =========================================================
+     AMBIENT MOVING GLOW
+     Only added to dark sections without photo backgrounds.
+     ========================================================= */
+  #expertise,
+  #roles,
+  #process,
+  #track,
+  #team,
+  #insights{
+    position:relative;
+    isolation:isolate;
+    overflow:hidden;
+  }
+
+  #expertise > .container,
+  #roles > .container,
+  #process > .container,
+  #track > .container,
+  #team > .container,
+  #insights > .container{
+    position:relative;
+    z-index:2;
+  }
+
+  .ambient-glow{
+    position:absolute;
+    z-index:0;
+    top:-26%;
+    left:-20%;
+    width:clamp(520px,62vw,980px);
+    aspect-ratio:1;
+    border-radius:50%;
+    pointer-events:none;
+    opacity:.48;
+    filter:blur(42px);
+    background:
+      radial-gradient(circle at 48% 48%, rgba(200,155,99,.24) 0%, rgba(200,155,99,.11) 28%, rgba(122,151,196,.055) 48%, transparent 70%);
+    transform:translate3d(0,0,0) scale(1);
+    will-change:transform;
+    animation:ambient-glow-drift 18s cubic-bezier(.45,.05,.55,.95) infinite alternate;
+  }
+
+  #roles .ambient-glow,
+  #track .ambient-glow,
+  #insights .ambient-glow{
+    left:auto;
+    right:-24%;
+    animation-name:ambient-glow-drift-reverse;
+    animation-duration:22s;
+  }
+
+  #process .ambient-glow{top:8%; opacity:.40; animation-duration:20s;}
+  #team .ambient-glow{top:18%; opacity:.42; animation-duration:24s;}
+
+  .ambient-glow::after{
+    content:"";
+    position:absolute;
+    inset:20%;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(215,174,124,.12), transparent 68%);
+    filter:blur(20px);
+  }
+
+  @keyframes ambient-glow-drift{
+    0%{transform:translate3d(-4%, -2%, 0) scale(.94);}
+    35%{transform:translate3d(30%, 12%, 0) scale(1.08);}
+    70%{transform:translate3d(62%, -4%, 0) scale(1);}
+    100%{transform:translate3d(92%, 18%, 0) scale(1.12);}
+  }
+
+  @keyframes ambient-glow-drift-reverse{
+    0%{transform:translate3d(4%, -3%, 0) scale(1);}
+    38%{transform:translate3d(-28%, 14%, 0) scale(1.1);}
+    72%{transform:translate3d(-58%, -2%, 0) scale(.96);}
+    100%{transform:translate3d(-88%, 16%, 0) scale(1.08);}
+  }
+
+  @media (max-width:760px){
+    .ambient-glow{
+      width:760px;
+      opacity:.34;
+      filter:blur(54px);
+      animation-duration:24s;
+    }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .mobile-menu,
+    .mobile-menu a,
+    .mobile-menu .nav-cta,
+    .nav-toggle,
+    .nav-toggle::before,
+    .nav-toggle::after{transition-duration:.01ms !important;}
+    .ambient-glow{animation:none !important; transform:translate3d(25%,8%,0);}
+  }
+</style>
+
+
+<style id="meridian-restored-section-gradients">
+  /* =========================================================
+     RESTORED SECTION TRANSITIONS + LARGER AMBIENT GLOW
+     The gradients sit below all content and above the moving glow.
+     ========================================================= */
+
+  #expertise,
+  #roles,
+  #process,
+  #track,
+  #team,
+  #insights{
+    position:relative !important;
+    isolation:isolate !important;
+    overflow:hidden !important;
+  }
+
+  /* Content always remains above the background effects */
+  #expertise > .container,
+  #roles > .container,
+  #process > .container,
+  #track > .container,
+  #team > .container,
+  #insights > .container{
+    position:relative !important;
+    z-index:3 !important;
+  }
+
+  /* Larger and slightly more visible glow */
+  #expertise > .ambient-glow,
+  #roles > .ambient-glow,
+  #process > .ambient-glow,
+  #track > .ambient-glow,
+  #team > .ambient-glow,
+  #insights > .ambient-glow{
+    z-index:0 !important;
+    width:clamp(760px,82vw,1320px) !important;
+    opacity:.58 !important;
+    filter:blur(58px) !important;
+    background:
+      radial-gradient(
+        circle at 48% 48%,
+        rgba(215,174,124,.30) 0%,
+        rgba(200,155,99,.17) 28%,
+        rgba(122,151,196,.075) 50%,
+        rgba(122,151,196,.025) 64%,
+        transparent 76%
+      ) !important;
+  }
+
+  #process > .ambient-glow{opacity:.50 !important;}
+  #team > .ambient-glow{opacity:.52 !important;}
+
+  /* Restore a clearly visible but soft transition at every section boundary */
+  #expertise::before,
+  #roles::before,
+  #process::before,
+  #track::before,
+  #team::before,
+  #insights::before{
+    content:"" !important;
+    display:block !important;
+    position:absolute !important;
+    z-index:1 !important;
+    left:0 !important;
+    right:0 !important;
+    top:0 !important;
+    height:clamp(150px,15vw,240px) !important;
+    pointer-events:none !important;
+    transform:translateY(-1px) !important;
+    opacity:1 !important;
+    background:
+      radial-gradient(
+        ellipse 78% 78% at 50% 0%,
+        rgba(200,155,99,.12) 0%,
+        rgba(200,155,99,.055) 36%,
+        transparent 72%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(6,8,12,.88) 0%,
+        rgba(9,12,17,.54) 30%,
+        rgba(13,17,23,.18) 68%,
+        rgba(13,17,23,0) 100%
+      ) !important;
+  }
+
+  #expertise::after,
+  #roles::after,
+  #process::after,
+  #track::after,
+  #team::after,
+  #insights::after{
+    content:"" !important;
+    display:block !important;
+    position:absolute !important;
+    z-index:1 !important;
+    left:0 !important;
+    right:0 !important;
+    bottom:0 !important;
+    height:clamp(150px,15vw,240px) !important;
+    pointer-events:none !important;
+    transform:translateY(1px) !important;
+    background:
+      radial-gradient(
+        ellipse 72% 70% at 50% 100%,
+        rgba(122,151,196,.065) 0%,
+        rgba(200,155,99,.055) 34%,
+        transparent 72%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(13,17,23,0) 0%,
+        rgba(10,13,18,.20) 38%,
+        rgba(7,9,13,.62) 76%,
+        rgba(6,8,12,.88) 100%
+      ) !important;
+  }
+
+  /* Alternate section accents so the transitions feel continuous, not repetitive */
+  #roles::before,
+  #track::before,
+  #insights::before{
+    background:
+      radial-gradient(
+        ellipse 82% 82% at 72% 0%,
+        rgba(200,155,99,.14) 0%,
+        rgba(200,155,99,.06) 34%,
+        transparent 72%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(6,8,12,.90) 0%,
+        rgba(9,12,17,.55) 32%,
+        rgba(13,17,23,.16) 70%,
+        transparent 100%
+      ) !important;
+  }
+
+  #process::before,
+  #team::before{
+    background:
+      radial-gradient(
+        ellipse 82% 82% at 28% 0%,
+        rgba(122,151,196,.09) 0%,
+        rgba(200,155,99,.055) 38%,
+        transparent 72%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(6,8,12,.90) 0%,
+        rgba(9,12,17,.55) 32%,
+        rgba(13,17,23,.16) 70%,
+        transparent 100%
+      ) !important;
+  }
+
+  @media (max-width:991px){
+    #expertise > .ambient-glow,
+    #roles > .ambient-glow,
+    #process > .ambient-glow,
+    #track > .ambient-glow,
+    #team > .ambient-glow,
+    #insights > .ambient-glow{
+      width:980px !important;
+      opacity:.50 !important;
+      filter:blur(66px) !important;
+    }
+
+    #expertise::before,
+    #roles::before,
+    #process::before,
+    #track::before,
+    #team::before,
+    #insights::before,
+    #expertise::after,
+    #roles::after,
+    #process::after,
+    #track::after,
+    #team::after,
+    #insights::after{
+      height:150px !important;
+    }
+  }
+
+  @media (max-width:600px){
+    #expertise > .ambient-glow,
+    #roles > .ambient-glow,
+    #process > .ambient-glow,
+    #track > .ambient-glow,
+    #team > .ambient-glow,
+    #insights > .ambient-glow{
+      width:820px !important;
+      opacity:.42 !important;
+      filter:blur(72px) !important;
+    }
+
+    #expertise::before,
+    #roles::before,
+    #process::before,
+    #track::before,
+    #team::before,
+    #insights::before,
+    #expertise::after,
+    #roles::after,
+    #process::after,
+    #track::after,
+    #team::after,
+    #insights::after{
+      height:112px !important;
+    }
+  }
+</style>
+
+
+<style id="meridian-radial-glow-no-lines">
+  /* =========================================================
+     LINE-FREE AMBIENT BACKGROUND
+     Large radial glows only — no horizontal linear gradients.
+     ========================================================= */
+
+  #expertise,
+  #roles,
+  #process,
+  #track,
+  #team,
+  #insights{
+    position:relative !important;
+    isolation:isolate !important;
+    overflow:hidden !important;
+  }
+
+  #expertise > .container,
+  #roles > .container,
+  #process > .container,
+  #track > .container,
+  #team > .container,
+  #insights > .container{
+    position:relative !important;
+    z-index:4 !important;
+  }
+
+  /* Disable the previous top/bottom gradient bands */
+  #expertise::before,
+  #roles::before,
+  #process::before,
+  #track::before,
+  #team::before,
+  #insights::before,
+  #expertise::after,
+  #roles::after,
+  #process::after,
+  #track::after,
+  #team::after,
+  #insights::after{
+    content:none !important;
+    display:none !important;
+  }
+
+  /* Main animated glow */
+  #expertise > .ambient-glow,
+  #roles > .ambient-glow,
+  #process > .ambient-glow,
+  #track > .ambient-glow,
+  #team > .ambient-glow,
+  #insights > .ambient-glow{
+    z-index:0 !important;
+    width:clamp(1200px,115vw,2200px) !important;
+    aspect-ratio:1.35 / 1 !important;
+    border-radius:50% !important;
+    opacity:.72 !important;
+    filter:blur(88px) !important;
+    background:
+      radial-gradient(
+        ellipse at center,
+        rgba(215,174,124,.30) 0%,
+        rgba(200,155,99,.18) 24%,
+        rgba(122,151,196,.09) 46%,
+        rgba(122,151,196,.035) 62%,
+        transparent 78%
+      ) !important;
+    mix-blend-mode:screen;
+  }
+
+  /* Extra soft ambient layer */
+  #expertise .ambient-glow::before,
+  #roles .ambient-glow::before,
+  #process .ambient-glow::before,
+  #track .ambient-glow::before,
+  #team .ambient-glow::before,
+  #insights .ambient-glow::before{
+    content:"";
+    position:absolute;
+    inset:8%;
+    border-radius:50%;
+    background:
+      radial-gradient(
+        ellipse at 38% 45%,
+        rgba(200,155,99,.18) 0%,
+        rgba(200,155,99,.08) 36%,
+        transparent 74%
+      );
+    filter:blur(44px);
+    opacity:.9;
+    pointer-events:none;
+  }
+
+  #expertise .ambient-glow::after,
+  #roles .ambient-glow::after,
+  #process .ambient-glow::after,
+  #track .ambient-glow::after,
+  #team .ambient-glow::after,
+  #insights .ambient-glow::after{
+    content:"";
+    position:absolute;
+    inset:18%;
+    border-radius:50%;
+    background:
+      radial-gradient(
+        ellipse at 62% 55%,
+        rgba(126,158,210,.12) 0%,
+        rgba(126,158,210,.045) 42%,
+        transparent 72%
+      );
+    filter:blur(36px);
+    opacity:.78;
+    pointer-events:none;
+  }
+
+  /* Distinct starting positions prevent visible repetition */
+  #expertise > .ambient-glow{
+    top:-42% !important;
+    left:-38% !important;
+  }
+
+  #roles > .ambient-glow{
+    top:-30% !important;
+    right:-44% !important;
+    left:auto !important;
+  }
+
+  #process > .ambient-glow{
+    top:2% !important;
+    left:-46% !important;
+  }
+
+  #track > .ambient-glow{
+    top:-18% !important;
+    right:-40% !important;
+    left:auto !important;
+  }
+
+  #team > .ambient-glow{
+    top:10% !important;
+    left:-42% !important;
+  }
+
+  #insights > .ambient-glow{
+    top:-24% !important;
+    right:-46% !important;
+    left:auto !important;
+  }
+
+  /* Additional static cross-section light pools.
+     These extend beyond boundaries so the sections blend naturally. */
+  #expertise,
+  #roles,
+  #process,
+  #track,
+  #team,
+  #insights{
+    background-color:#0D1117 !important;
+    background-image:
+      radial-gradient(
+        ellipse 120% 55% at 50% -18%,
+        rgba(200,155,99,.10) 0%,
+        rgba(200,155,99,.045) 34%,
+        transparent 72%
+      ),
+      radial-gradient(
+        ellipse 110% 50% at 50% 118%,
+        rgba(122,151,196,.07) 0%,
+        rgba(122,151,196,.025) 42%,
+        transparent 74%
+      ) !important;
+    background-repeat:no-repeat !important;
+  }
+
+  /* Slight variation per section */
+  #roles,
+  #track,
+  #insights{
+    background-image:
+      radial-gradient(
+        ellipse 125% 58% at 78% -20%,
+        rgba(200,155,99,.12) 0%,
+        rgba(200,155,99,.045) 36%,
+        transparent 74%
+      ),
+      radial-gradient(
+        ellipse 115% 52% at 24% 120%,
+        rgba(122,151,196,.065) 0%,
+        rgba(122,151,196,.022) 44%,
+        transparent 76%
+      ) !important;
+  }
+
+  #process,
+  #team{
+    background-image:
+      radial-gradient(
+        ellipse 125% 58% at 22% -20%,
+        rgba(122,151,196,.08) 0%,
+        rgba(200,155,99,.05) 36%,
+        transparent 74%
+      ),
+      radial-gradient(
+        ellipse 115% 52% at 76% 120%,
+        rgba(200,155,99,.08) 0%,
+        rgba(200,155,99,.026) 44%,
+        transparent 76%
+      ) !important;
+  }
+
+  @media (max-width:991px){
+    #expertise > .ambient-glow,
+    #roles > .ambient-glow,
+    #process > .ambient-glow,
+    #track > .ambient-glow,
+    #team > .ambient-glow,
+    #insights > .ambient-glow{
+      width:1600px !important;
+      opacity:.62 !important;
+      filter:blur(96px) !important;
+    }
+  }
+
+  @media (max-width:600px){
+    #expertise > .ambient-glow,
+    #roles > .ambient-glow,
+    #process > .ambient-glow,
+    #track > .ambient-glow,
+    #team > .ambient-glow,
+    #insights > .ambient-glow{
+      width:1180px !important;
+      opacity:.52 !important;
+      filter:blur(100px) !important;
+      mix-blend-mode:normal;
+    }
+  }
+</style>
+
+
+<style id="meridian-continuous-body-gradient">
+  /* =========================================================
+     CONTINUOUS BODY BACKGROUND
+     One uninterrupted gradient behind all dark content sections.
+     Photo sections remain independent.
+     ========================================================= */
+
+  body{
+    background:
+      radial-gradient(
+        ellipse 90% 32% at 16% 18%,
+        rgba(200,155,99,.16) 0%,
+        rgba(200,155,99,.07) 34%,
+        transparent 72%
+      ),
+      radial-gradient(
+        ellipse 92% 34% at 84% 38%,
+        rgba(122,151,196,.10) 0%,
+        rgba(122,151,196,.04) 38%,
+        transparent 74%
+      ),
+      radial-gradient(
+        ellipse 88% 30% at 28% 62%,
+        rgba(200,155,99,.12) 0%,
+        rgba(200,155,99,.045) 36%,
+        transparent 72%
+      ),
+      radial-gradient(
+        ellipse 96% 36% at 78% 84%,
+        rgba(122,151,196,.08) 0%,
+        rgba(200,155,99,.035) 42%,
+        transparent 76%
+      ),
+      linear-gradient(
+        180deg,
+        #0B0E13 0%,
+        #0D1117 24%,
+        #10141A 50%,
+        #0D1117 76%,
+        #090B0F 100%
+      ) !important;
+    background-attachment:scroll !important;
+  }
+
+  /* All dark content sections become transparent.
+     This removes section-edge seams completely. */
+  #expertise,
+  #roles,
+  #process,
+  #track,
+  #team,
+  #insights{
+    background:transparent !important;
+    background-image:none !important;
+    background-color:transparent !important;
+    border:none !important;
+    box-shadow:none !important;
+    outline:none !important;
+    margin-top:0 !important;
+  }
+
+  /* Disable every previous section-level gradient and glow layer */
+  #expertise::before,
+  #roles::before,
+  #process::before,
+  #track::before,
+  #team::before,
+  #insights::before,
+  #expertise::after,
+  #roles::after,
+  #process::after,
+  #track::after,
+  #team::after,
+  #insights::after{
+    content:none !important;
+    display:none !important;
+    background:none !important;
+  }
+
+  #expertise > .ambient-glow,
+  #roles > .ambient-glow,
+  #process > .ambient-glow,
+  #track > .ambient-glow,
+  #team > .ambient-glow,
+  #insights > .ambient-glow{
+    display:none !important;
+  }
+
+  /* Preserve photo-background sections */
+  .hero-photo-wrap,
+  .cta-photo-wrap,
+  footer.meridian-footer{
+    position:relative !important;
+    isolation:isolate !important;
+    background-color:#090B0F !important;
+  }
+
+  .hero-photo-wrap > .hero-bg,
+  .cta-photo-wrap > .cta-bg,
+  footer.meridian-footer > .footer-bg{
+    display:block !important;
+  }
+
+  /* Keep the photo-to-body transition soft */
+  .hero-photo-wrap > .hero-bg::after{
+    background:
+      linear-gradient(
+        180deg,
+        rgba(9,11,15,0) 0%,
+        rgba(9,11,15,0) 46%,
+        rgba(9,11,15,.18) 62%,
+        rgba(9,11,15,.58) 78%,
+        #0B0E13 100%
+      ) !important;
+  }
+
+  .cta-bg::after{
+    background:
+      linear-gradient(
+        180deg,
+        #090B0F 0%,
+        rgba(9,11,15,.70) 18%,
+        rgba(9,11,15,.28) 42%,
+        rgba(9,11,15,.60) 76%,
+        #090B0F 100%
+      ) !important;
+  }
+
+  /* Content remains above body background */
+  #expertise > .container,
+  #roles > .container,
+  #process > .container,
+  #track > .container,
+  #team > .container,
+  #insights > .container{
+    position:relative !important;
+    z-index:2 !important;
+  }
+</style>
+
+
+<style id="meridian-glass-coordinate-wordmark">
+  /* =========================================================
+     GLASS MERIDIAN WORDMARK
+     Longitude and latitude lines drift through the letters.
+     ========================================================= */
+
+  .footer-panel-wordmark{
+    position:relative !important;
+    isolation:isolate !important;
+    overflow:visible !important;
+
+    color:transparent !important;
+    -webkit-text-fill-color:transparent !important;
+    -webkit-text-stroke:1px rgba(245,245,244,.14) !important;
+
+    background-image:
+      radial-gradient(
+        ellipse 24% 110% at var(--meridian-light-x, 18%) 50%,
+        rgba(255,255,255,.30) 0%,
+        rgba(215,174,124,.18) 20%,
+        rgba(255,255,255,.055) 48%,
+        transparent 72%
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(215,174,124,.18) 0 1px,
+        transparent 1px 74px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        rgba(245,245,244,.075) 0 1px,
+        transparent 1px 32px
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255,255,255,.15) 0%,
+        rgba(255,255,255,.035) 42%,
+        rgba(200,155,99,.10) 72%,
+        rgba(255,255,255,.025) 100%
+      ) !important;
+
+    background-size:
+      180% 100%,
+      100% 100%,
+      100% 100%,
+      100% 100% !important;
+
+    background-position:
+      -70% 50%,
+      0 0,
+      0 0,
+      0 0 !important;
+
+    -webkit-background-clip:text !important;
+    background-clip:text !important;
+
+    filter:
+      drop-shadow(0 12px 34px rgba(0,0,0,.24))
+      drop-shadow(0 0 28px rgba(200,155,99,.05));
+
+    transform-origin:center center;
+    animation:
+      meridian-coordinate-drift 18s cubic-bezier(.45,.05,.55,.95) infinite alternate,
+      meridian-glass-breathe 7s ease-in-out infinite;
+  }
+
+  /* Secondary etched outline creates a deeper glass edge */
+  .footer-panel-wordmark::before{
+    content:"MERIDIAN";
+    position:absolute;
+    inset:0;
+    z-index:-1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font:inherit;
+    letter-spacing:inherit;
+    line-height:inherit;
+    white-space:nowrap;
+
+    color:transparent;
+    -webkit-text-fill-color:transparent;
+    -webkit-text-stroke:1px rgba(200,155,99,.075);
+
+    transform:translateY(2px) scale(1.002);
+    filter:blur(.25px);
+    pointer-events:none;
+  }
+
+  /* Moving longitude marker */
+  .footer-panel-wordmark::after{
+    content:"";
+    position:absolute;
+    z-index:2;
+    top:8%;
+    bottom:6%;
+    left:0;
+    width:1px;
+    opacity:.7;
+    pointer-events:none;
+
+    background:linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(215,174,124,.12) 12%,
+      rgba(215,174,124,.72) 48%,
+      rgba(215,174,124,.12) 86%,
+      transparent 100%
+    );
+
+    box-shadow:
+      0 0 10px rgba(215,174,124,.18),
+      0 0 24px rgba(215,174,124,.08);
+
+    animation:meridian-longitude-scan 10s cubic-bezier(.55,0,.45,1) infinite;
+  }
+
+  @keyframes meridian-coordinate-drift{
+    0%{
+      background-position:
+        -72% 50%,
+        -18px 0,
+        0 -12px,
+        0 0;
+      transform:perspective(1000px) rotateX(0deg) translateY(0);
+    }
+
+    50%{
+      background-position:
+        48% 50%,
+        16px 0,
+        0 10px,
+        0 0;
+      transform:perspective(1000px) rotateX(.7deg) translateY(-2px);
+    }
+
+    100%{
+      background-position:
+        170% 50%,
+        48px 0,
+        0 26px,
+        0 0;
+      transform:perspective(1000px) rotateX(0deg) translateY(0);
+    }
+  }
+
+  @keyframes meridian-longitude-scan{
+    0%{
+      left:4%;
+      opacity:0;
+    }
+
+    10%{
+      opacity:.65;
+    }
+
+    50%{
+      opacity:.9;
+    }
+
+    90%{
+      opacity:.65;
+    }
+
+    100%{
+      left:96%;
+      opacity:0;
+    }
+  }
+
+  @keyframes meridian-glass-breathe{
+    0%,100%{
+      -webkit-text-stroke-color:rgba(245,245,244,.12);
+      filter:
+        drop-shadow(0 12px 34px rgba(0,0,0,.24))
+        drop-shadow(0 0 24px rgba(200,155,99,.04));
+    }
+
+    50%{
+      -webkit-text-stroke-color:rgba(245,245,244,.19);
+      filter:
+        drop-shadow(0 14px 38px rgba(0,0,0,.27))
+        drop-shadow(0 0 34px rgba(200,155,99,.09));
+    }
+  }
+
+  @media (max-width:1024px){
+    .footer-panel-wordmark{
+      -webkit-text-stroke-width:.8px !important;
+      background-image:
+        radial-gradient(
+          ellipse 30% 110% at center,
+          rgba(255,255,255,.24) 0%,
+          rgba(215,174,124,.14) 22%,
+          rgba(255,255,255,.045) 48%,
+          transparent 72%
+        ),
+        repeating-linear-gradient(
+          90deg,
+          rgba(215,174,124,.15) 0 1px,
+          transparent 1px 58px
+        ),
+        repeating-linear-gradient(
+          0deg,
+          rgba(245,245,244,.065) 0 1px,
+          transparent 1px 26px
+        ),
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,.13),
+          rgba(255,255,255,.025) 46%,
+          rgba(200,155,99,.08)
+        ) !important;
+      -webkit-background-clip:text !important;
+      background-clip:text !important;
+    }
+  }
+
+  @media (max-width:600px){
+    .footer-panel-wordmark::after{
+      top:12%;
+      bottom:10%;
+    }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .footer-panel-wordmark,
+    .footer-panel-wordmark::after{
+      animation:none !important;
+    }
+
+    .footer-panel-wordmark{
+      background-position:
+        42% 50%,
+        0 0,
+        0 0,
+        0 0 !important;
+      transform:none !important;
+    }
+
+    .footer-panel-wordmark::after{
+      display:none !important;
+    }
+  }
+</style>
+
+
+<style id="meridian-nav-close-glass-logo">
+  /* =========================================================
+     NAV LOGO — GLASS COORDINATE STYLE
+     A compact version of the animated footer wordmark.
+     ========================================================= */
+
+  .nav .brand{
+    position:relative;
+    isolation:isolate;
+  }
+
+  .nav .brand-mark{
+    position:relative;
+    overflow:hidden;
+    color:transparent !important;
+    -webkit-text-fill-color:transparent !important;
+    -webkit-text-stroke:1px rgba(215,174,124,.72);
+    background:
+      radial-gradient(circle at 28% 30%, rgba(255,255,255,.42), transparent 34%),
+      repeating-linear-gradient(
+        90deg,
+        rgba(215,174,124,.30) 0 1px,
+        transparent 1px 7px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        rgba(245,245,244,.16) 0 1px,
+        transparent 1px 6px
+      ),
+      linear-gradient(
+        135deg,
+        rgba(255,255,255,.22),
+        rgba(200,155,99,.10) 52%,
+        rgba(255,255,255,.04)
+      );
+    background-size:180% 100%,100% 100%,100% 100%,100% 100%;
+    background-position:-80% 50%,0 0,0 0,0 0;
+    -webkit-background-clip:text;
+    background-clip:text;
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,.025),
+      0 0 18px rgba(200,155,99,.055);
+    animation:nav-logo-coordinate-shift 10s ease-in-out infinite alternate;
+  }
+
+  .nav .brand-mark::after{
+    content:"";
+    position:absolute;
+    top:4px;
+    bottom:4px;
+    left:7px;
+    width:1px;
+    border-radius:999px;
+    background:linear-gradient(
+      180deg,
+      transparent,
+      rgba(215,174,124,.78),
+      transparent
+    );
+    box-shadow:0 0 8px rgba(215,174,124,.25);
+    animation:nav-logo-meridian-scan 6.8s cubic-bezier(.55,0,.45,1) infinite;
+  }
+
+  .nav .brand-text{
+    color:transparent !important;
+    -webkit-text-fill-color:transparent !important;
+    -webkit-text-stroke:.35px rgba(245,245,244,.20);
+    background:
+      radial-gradient(
+        ellipse 28% 160% at 20% 50%,
+        rgba(255,255,255,.44),
+        rgba(215,174,124,.22) 30%,
+        transparent 72%
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(215,174,124,.16) 0 1px,
+        transparent 1px 20px
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255,255,255,.95),
+        rgba(245,245,244,.58) 58%,
+        rgba(200,155,99,.42)
+      );
+    background-size:190% 100%,100% 100%,100% 100%;
+    background-position:-80% 50%,0 0,0 0;
+    -webkit-background-clip:text;
+    background-clip:text;
+    filter:drop-shadow(0 0 12px rgba(200,155,99,.055));
+    animation:nav-logo-coordinate-shift 10s ease-in-out infinite alternate;
+  }
+
+  .nav .brand-text small{
+    color:rgba(245,245,244,.58) !important;
+    -webkit-text-fill-color:rgba(245,245,244,.58) !important;
+    -webkit-text-stroke:0;
+    background:none;
+  }
+
+  .nav.scrolled .brand-text small{
+    color:rgba(245,245,244,.50) !important;
+    -webkit-text-fill-color:rgba(245,245,244,.50) !important;
+  }
+
+  @keyframes nav-logo-coordinate-shift{
+    0%{background-position:-80% 50%,0 0,0 0;}
+    100%{background-position:170% 50%,24px 0,0 0;}
+  }
+
+  @keyframes nav-logo-meridian-scan{
+    0%{left:6px;opacity:0;}
+    12%{opacity:.78;}
+    88%{opacity:.78;}
+    100%{left:25px;opacity:0;}
+  }
+
+  /* =========================================================
+     MOBILE CLOSE BUTTON
+     Fixes the stacking-context issue that hid the X behind menu.
+     ========================================================= */
+
+  @media (max-width:980px){
+    /* The menu used z-index:305 while nav used 300.
+       Raising the complete nav keeps the morphing button clickable. */
+    .nav{
+      z-index:340 !important;
+      pointer-events:none;
+    }
+
+    .nav .brand,
+    .nav .nav-toggle,
+    .nav .nav-cta{
+      pointer-events:auto;
+    }
+
+    body.menu-open .nav{
+      background:transparent !important;
+      border-color:transparent !important;
+      backdrop-filter:none !important;
+      -webkit-backdrop-filter:none !important;
+    }
+
+    body.menu-open .nav .brand,
+    body.menu-open .nav .nav-cta{
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+      transition:opacity 220ms ease, visibility 0s linear 220ms;
+    }
+
+    .nav-toggle{
+      position:relative !important;
+      z-index:350 !important;
+      color:#F5F5F4 !important;
+      overflow:visible !important;
+    }
+
+    .nav-toggle[aria-expanded="true"]{
+      color:#F5F5F4 !important;
+      background:rgba(12,15,20,.72) !important;
+      border-color:rgba(215,174,124,.58) !important;
+      box-shadow:
+        0 0 0 5px rgba(200,155,99,.07),
+        0 0 24px rgba(200,155,99,.14),
+        inset 0 0 20px rgba(255,255,255,.025);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+    }
+
+    .nav-toggle::before,
+    .nav-toggle::after{
+      z-index:2 !important;
+      width:20px !important;
+      height:2px !important;
+      background:#F5F5F4 !important;
+      box-shadow:0 0 7px rgba(255,255,255,.16);
+    }
+
+    .nav-toggle[aria-expanded="true"]::before{
+      transform:translate(-50%,0) rotate(45deg) !important;
+    }
+
+    .nav-toggle[aria-expanded="true"]::after{
+      transform:translate(-50%,0) rotate(-45deg) !important;
+    }
+
+    /* Explicit close label improves clarity without adding another button. */
+    .nav-toggle > .nav-close-label{
+      position:absolute;
+      right:calc(100% + 12px);
+      top:50%;
+      transform:translateY(-50%) translateX(8px);
+      color:rgba(245,245,244,.72);
+      font-family:'IBM Plex Mono',monospace;
+      font-size:10px;
+      line-height:1;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      white-space:nowrap;
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+      transition:opacity 250ms ease, transform 350ms var(--ease), visibility 0s linear 250ms;
+    }
+
+    .nav-toggle[aria-expanded="true"] > .nav-close-label{
+      opacity:1;
+      visibility:visible;
+      transform:translateY(-50%) translateX(0);
+      transition-delay:180ms;
+    }
+
+    .mobile-menu{
+      z-index:330 !important;
+    }
+  }
+
+  @media (max-width:520px){
+    .nav-toggle > .nav-close-label{
+      display:none;
+    }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .nav .brand-mark,
+    .nav .brand-mark::after,
+    .nav .brand-text{
+      animation:none !important;
+    }
+  }
+</style>
+
+
+<style id="meridian-final-hero-expertise-seam-fix">
+/* Final fix: remove the hard horizontal seam between Hero/Trusted and Expertise */
+.hero-photo-wrap{
+  position:relative !important;
+  margin-bottom:-2px !important;
+  background:#090B0F !important;
+}
+
+#expertise{
+  position:relative !important;
+  margin-top:0 !important;
+  background-color:transparent !important;
+  background-image:linear-gradient(
+    180deg,
+    #090B0F 0px,
+    #0A0D12 48px,
+    rgba(11,14,19,.96) 96px,
+    rgba(12,16,22,.72) 160px,
+    rgba(13,17,23,.28) 230px,
+    rgba(13,17,23,0) 320px
+  ) !important;
+  background-repeat:no-repeat !important;
+  background-size:100% 320px !important;
+}
+
+/* A soft overlap hides subpixel seams on high-DPI screens */
+#expertise::before{
+  content:"" !important;
+  display:block !important;
+  position:absolute !important;
+  left:0 !important;
+  right:0 !important;
+  top:-3px !important;
+  height:180px !important;
+  z-index:0 !important;
+  pointer-events:none !important;
+  background:linear-gradient(
+    180deg,
+    #090B0F 0%,
+    rgba(9,11,15,.88) 22%,
+    rgba(11,14,19,.48) 62%,
+    rgba(13,17,23,0) 100%
+  ) !important;
+}
+
+#expertise > .container{
+  position:relative !important;
+  z-index:2 !important;
+}
+
+@media (max-width:600px){
+  #expertise{background-size:100% 220px !important;}
+  #expertise::before{height:130px !important;}
+}
+</style>
 </head>
 <body class="loading">
   <div class="page-loader" id="page-loader"><span class="page-loader-mark">M</span></div>
@@ -5051,7 +6474,8 @@ body{
       <button class="nav-cta" data-scroll="contact">Start a Search →</button>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
+      
+        <span class="nav-close-label" aria-hidden="true">Close</span></button>
     </div>
     </div>
   </nav>
@@ -6582,22 +8006,46 @@ body{
       });
     });
 
-    // ---- mobile menu ----
+    // ---- premium mobile menu ----
     const navToggle = document.getElementById('nav-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
+    let menuCloseTimer = null;
+
     function setMobileMenu(open){
+      if(!navToggle || !mobileMenu) return;
+      window.clearTimeout(menuCloseTimer);
       mobileMenu.classList.toggle('open', open);
       navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      navToggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+      document.body.classList.toggle('menu-open', open);
+      mobileMenu.setAttribute('aria-hidden', open ? 'false' : 'true');
+
+      if(open){
+        const firstLink = mobileMenu.querySelector('a, button');
+        menuCloseTimer = window.setTimeout(function(){ if(firstLink) firstLink.focus(); }, 520);
+      }
     }
-    navToggle.addEventListener('click', function(){ setMobileMenu(!mobileMenu.classList.contains('open')); });
-    document.addEventListener('click', function(e){
-      if(!mobileMenu.contains(e.target) && !navToggle.contains(e.target)) setMobileMenu(false);
+
+    navToggle.addEventListener('click', function(e){
+      e.stopPropagation();
+      setMobileMenu(!mobileMenu.classList.contains('open'));
     });
+
+    document.addEventListener('click', function(e){
+      if(mobileMenu.classList.contains('open') && !mobileMenu.contains(e.target) && !navToggle.contains(e.target)){
+        setMobileMenu(false);
+      }
+    });
+
     document.addEventListener('keydown', function(e){
       if(e.key === 'Escape' && mobileMenu.classList.contains('open')){
         setMobileMenu(false);
         navToggle.focus();
       }
+    });
+
+    window.addEventListener('resize', function(){
+      if(window.innerWidth > 980 && mobileMenu.classList.contains('open')) setMobileMenu(false);
     });
 
     // ---- reveal on scroll ----
@@ -6943,6 +8391,20 @@ window.addEventListener('load', function(){
   window.addEventListener('load', function(){
     preparePath();
     updateRoute();
+  });
+})();
+</script>
+
+<script id="meridian-ambient-glow-init">
+(function(){
+  const ids=['expertise','roles','process','track','team','insights'];
+  ids.forEach(function(id){
+    const section=document.getElementById(id);
+    if(!section || section.querySelector(':scope > .ambient-glow')) return;
+    const glow=document.createElement('div');
+    glow.className='ambient-glow';
+    glow.setAttribute('aria-hidden','true');
+    section.insertBefore(glow, section.firstChild);
   });
 })();
 </script>
