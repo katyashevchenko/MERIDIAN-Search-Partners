@@ -6591,6 +6591,131 @@ body{
   }
 }
 
+
+/* ===== Insights equal height + spacing ===== */
+@media (max-width:760px){
+  #insights .insights-grid{
+    align-items:stretch !important;
+  }
+  #insights .insight-card{
+    height:480px !important;
+    min-height:480px !important;
+    display:flex !important;
+    flex-direction:column !important;
+  }
+  #insights{
+    margin-bottom:3.5rem !important;
+    padding-bottom:0 !important;
+  }
+}
+@media (min-width:761px){
+  #insights{
+    margin-bottom:5rem !important;
+    padding-bottom:0 !important;
+  }
+}
+
+
+/* =========================================================
+   FINAL INSIGHTS MOBILE HEIGHT + INSIGHTS → CONTACT SPACING FIX
+   Cause fixed:
+   - lead/closing cards had different image min-heights
+   - the section and footer both added large vertical padding
+   ========================================================= */
+
+/* Keep only one source of spacing between Insights and the contact footer */
+#insights{
+  padding-bottom:0 !important;
+  margin-bottom:0 !important;
+}
+
+footer.meridian-footer{
+  padding-top:5rem !important;
+}
+
+/* Mobile: every Insights card uses exactly the same dimensions */
+@media (max-width:760px){
+  #insights .insights-grid{
+    align-items:stretch !important;
+  }
+
+  #insights .insight-card,
+  #insights .insight-card.active,
+  #insights .insight-card:nth-child(1),
+  #insights .insight-card:nth-child(2),
+  #insights .insight-card:nth-child(3),
+  #insights .insight-card:nth-child(4),
+  #insights .insight-card:nth-child(5){
+    height:520px !important;
+    min-height:520px !important;
+    max-height:520px !important;
+    align-self:stretch !important;
+  }
+
+  /* Different image heights were the main reason the cards looked unequal */
+  #insights .insight-img,
+  #insights .insight-card.active .insight-img,
+  #insights .insight-card:nth-child(1) .insight-img,
+  #insights .insight-card:nth-child(2) .insight-img,
+  #insights .insight-card:nth-child(3) .insight-img,
+  #insights .insight-card:nth-child(4) .insight-img,
+  #insights .insight-card:nth-child(5) .insight-img{
+    flex:0 0 230px !important;
+    width:auto !important;
+    height:230px !important;
+    min-height:230px !important;
+    max-height:230px !important;
+  }
+
+  #insights .insight-body,
+  #insights .insight-card.active .insight-body,
+  #insights .insight-card:nth-child(1) .insight-body,
+  #insights .insight-card:nth-child(2) .insight-body,
+  #insights .insight-card:nth-child(3) .insight-body,
+  #insights .insight-card:nth-child(4) .insight-body,
+  #insights .insight-card:nth-child(5) .insight-body{
+    flex:1 1 auto !important;
+    min-height:0 !important;
+    justify-content:flex-start !important;
+  }
+
+  #insights .insight-footer{
+    margin-top:auto !important;
+  }
+
+  footer.meridian-footer{
+    padding-top:3.5rem !important;
+  }
+}
+
+/* Very small phones keep the same card height and image proportion */
+@media (max-width:420px){
+  #insights .insight-card,
+  #insights .insight-card.active,
+  #insights .insight-card:nth-child(1),
+  #insights .insight-card:nth-child(2),
+  #insights .insight-card:nth-child(3),
+  #insights .insight-card:nth-child(4),
+  #insights .insight-card:nth-child(5){
+    height:500px !important;
+    min-height:500px !important;
+    max-height:500px !important;
+  }
+
+  #insights .insight-img,
+  #insights .insight-card.active .insight-img,
+  #insights .insight-card:nth-child(1) .insight-img,
+  #insights .insight-card:nth-child(2) .insight-img,
+  #insights .insight-card:nth-child(3) .insight-img,
+  #insights .insight-card:nth-child(4) .insight-img,
+  #insights .insight-card:nth-child(5) .insight-img{
+    flex-basis:210px !important;
+    height:210px !important;
+    min-height:210px !important;
+    max-height:210px !important;
+  }
+}
+
 </style>
 
 <script>
