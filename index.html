@@ -1814,6 +1814,308 @@ footer.meridian-footer{
 
 
 
+
+<style id="meridian-design-system-stage-1">
+  /* =========================================================
+     STAGE 1 — GLOBAL DESIGN SYSTEM
+     Typography, container width, section rhythm and grid spacing.
+     No section-specific interactions are changed here.
+     ========================================================= */
+
+  :root{
+    --container-max:1360px;
+    --container-padding:48px;
+    --grid-gap:28px;
+    --section-space:144px;
+    --section-head-gap:64px;
+
+    --radius-card:28px;
+    --radius-image:22px;
+  }
+
+  .container{
+    width:100%;
+    max-width:var(--container-max);
+    margin-inline:auto;
+    padding-inline:var(--container-padding);
+  }
+
+  .section,
+  #roles{
+    padding-top:var(--section-space);
+    padding-bottom:var(--section-space);
+  }
+
+  .section-head.split{
+    margin-bottom:var(--section-head-gap);
+    gap:var(--grid-gap);
+  }
+
+  .hero-text h1{
+    font-size:clamp(58px,6vw,84px);
+    line-height:1;
+    letter-spacing:-.018em;
+  }
+
+  .section-head h2,
+  .expertise-head h2{
+    font-size:clamp(44px,4.5vw,64px);
+    line-height:1.03;
+    letter-spacing:-.016em;
+  }
+
+  .role-title,
+  .footer-contact-copy h2{
+    letter-spacing:-.016em;
+  }
+
+  .hero-text p,
+  .head-side p,
+  .expertise-head p{
+    font-size:18px;
+    line-height:1.6;
+  }
+
+  .eyebrow,
+  .hero-eyebrow,
+  .trusted-label{
+    letter-spacing:.14em;
+  }
+
+  .case-grid,
+  .team-grid,
+  .expertise-grid,
+  .insights-grid{
+    gap:var(--grid-gap);
+  }
+
+  .case-card,
+  .team-card,
+  .insight-card,
+  .exp-card,
+  .role-panel{
+    border-radius:var(--radius-card);
+  }
+
+  .case-text{
+    padding:28px 28px 30px;
+  }
+
+  .case-text h3{
+    font-size:28px;
+    line-height:1.12;
+    letter-spacing:-.012em;
+    margin-top:12px;
+  }
+
+  .case-text p{
+    margin-top:14px;
+    line-height:1.6;
+  }
+
+  .team-card .info{
+    padding:22px 22px 24px;
+  }
+
+  .team-card h3{
+    font-size:23px;
+    line-height:1.15;
+    letter-spacing:-.01em;
+  }
+
+  @media (max-width:991px){
+    :root{
+      --container-padding:32px;
+      --section-space:104px;
+      --section-head-gap:48px;
+      --grid-gap:24px;
+    }
+
+    .hero-text h1{
+      font-size:clamp(52px,7vw,68px);
+    }
+
+    .section-head h2,
+    .expertise-head h2{
+      font-size:clamp(42px,5.5vw,54px);
+    }
+  }
+
+  @media (max-width:600px){
+    :root{
+      --container-padding:20px;
+      --section-space:72px;
+      --section-head-gap:40px;
+      --grid-gap:18px;
+      --radius-card:22px;
+      --radius-image:18px;
+    }
+
+    .hero{
+      padding-top:112px;
+      padding-bottom:72px;
+    }
+
+    .hero-text h1{
+      font-size:clamp(42px,12vw,52px);
+      line-height:1.03;
+      letter-spacing:-.014em;
+    }
+
+    .section-head h2,
+    .expertise-head h2{
+      font-size:clamp(36px,10vw,44px);
+      line-height:1.06;
+      letter-spacing:-.012em;
+    }
+
+    .hero-text p,
+    .head-side p,
+    .expertise-head p{
+      font-size:16px;
+      line-height:1.6;
+    }
+
+    .eyebrow,
+    .hero-eyebrow,
+    .trusted-label{
+      font-size:12px;
+      letter-spacing:.12em;
+    }
+
+    .case-text{
+      padding:24px;
+    }
+
+    .case-text h3{
+      font-size:25px;
+    }
+
+    .team-card .info{
+      padding:20px;
+    }
+  }
+
+  /* =========================================================
+     EXPERTISE RESPONSIVE FIX
+     Prevents card titles from overlapping icons/indexes.
+     ========================================================= */
+
+  @media (max-width:1300px){
+    .expertise-layout{
+      grid-template-columns:1fr !important;
+      gap:48px !important;
+    }
+
+    .expertise-head{
+      max-width:760px;
+    }
+
+    .expertise-head p{
+      max-width:640px;
+    }
+  }
+
+  @media (min-width:861px) and (max-width:1300px){
+    .expertise-grid{
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:24px;
+    }
+
+    .expertise-grid .exp-card:nth-child(1),
+    .expertise-grid .exp-card:nth-child(2){
+      aspect-ratio:4 / 3;
+      min-height:320px;
+    }
+
+    .expertise-grid .exp-card:nth-child(3){
+      grid-column:1 / -1;
+      aspect-ratio:2 / 1;
+      min-height:330px;
+    }
+
+    .exp-body{
+      padding:24px;
+    }
+
+    .exp-body h3{
+      font-size:clamp(25px,3vw,31px);
+      line-height:1.08;
+      max-width:calc(100% - 10px);
+    }
+
+    .exp-body p{
+      font-size:13.5px;
+      line-height:1.5;
+      max-width:34ch;
+    }
+
+    .exp-ic{
+      top:18px;
+      left:18px;
+      width:40px;
+      height:40px;
+    }
+
+    .exp-index{
+      top:18px;
+      right:18px;
+    }
+  }
+
+  @media (max-width:860px){
+    .expertise-layout{
+      gap:40px !important;
+    }
+
+    .expertise-grid{
+      grid-template-columns:1fr;
+      gap:18px;
+    }
+
+    .expertise-grid .exp-card,
+    .expertise-grid .exp-card:nth-child(3){
+      grid-column:auto;
+      aspect-ratio:auto;
+      min-height:400px;
+    }
+
+    .exp-body{
+      padding:24px;
+    }
+
+    .exp-body h3{
+      font-size:28px;
+      line-height:1.08;
+      max-width:100%;
+    }
+
+    .exp-body p{
+      max-width:36ch;
+    }
+  }
+
+  @media (max-width:480px){
+    .expertise-grid .exp-card,
+    .expertise-grid .exp-card:nth-child(3){
+      min-height:380px;
+    }
+
+    .exp-body{
+      padding:22px;
+    }
+
+    .exp-body h3{
+      font-size:26px;
+    }
+
+    .exp-body p{
+      font-size:13px;
+    }
+  }
+
+</style>
+
 </head>
 <body class="loading">
   <div class="page-loader" id="page-loader"><span class="page-loader-mark">M</span></div>
