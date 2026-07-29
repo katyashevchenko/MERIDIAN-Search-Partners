@@ -6542,6 +6542,39 @@ body{
 }
 </style>
 
+
+<style id="meridian-how-we-search-stable-pin-css">
+  @media (min-width:901px){
+    #process{
+      position:relative !important;
+      overflow:visible !important;
+      min-height:100vh;
+      z-index:2;
+    }
+
+    #process > .container{
+      width:100%;
+      will-change:transform;
+      transform:translateZ(0);
+    }
+
+    #process.process-is-pinned{
+      overflow:visible !important;
+    }
+
+    #process + #track{
+      position:relative;
+      z-index:1;
+    }
+
+    /* Prevent background effects from creating a new clipping context
+       around the element that ScrollTrigger pins. */
+    #process > .ambient-glow{
+      pointer-events:none;
+    }
+  }
+</style>
+
 </head>
 <body class="loading">
   <div class="page-loader" id="page-loader"><span class="page-loader-mark">M</span></div>
@@ -7598,9 +7631,9 @@ body{
         if(psFinal) psFinal.classList.add('ps-complete');
       }
 
-      /* Restored scroll animation without pinning.
-         This preserves the original staged animation while preventing
-         the blank pinned screen caused by conflicting layout overrides. */
+      /* Stable desktop sequence:
+         the inner container is pinned, all stages finish, and only then
+         the following Track Record section is released. */
       if(reduceMotionProcess || !window.gsap || !window.ScrollTrigger){
         showEverythingProcess();
         activateStage(4);
@@ -7616,27 +7649,57 @@ body{
           gsap.set(headEls, {opacity: 0, y: 24});
 
           var lastStage = 0;
+          var processContainer = section.querySelector(':scope > .container');
+
           var tl = gsap.timeline({
             scrollTrigger: {
-              trigger: '#process',
-              start: 'top 72%',
-              end: 'bottom 28%',
-              scrub: 0.8,
-              pin: false,
+              id: 'meridian-process-stable',
+              trigger: section,
+              start: 'top top+=84',
+              end: '+=2200',
+              scrub: 0.85,
+
+              /* Pin only the inner container. Pinning the complete section
+                 caused the previous jump because its own height changed
+                 while ScrollTrigger was calculating the spacer. */
+              pin: processContainer,
+              pinSpacing: true,
+              anticipatePin: 1,
               invalidateOnRefresh: true,
+
+              onEnter: function(){
+                section.classList.add('process-is-pinned');
+              },
+              onEnterBack: function(){
+                section.classList.add('process-is-pinned');
+              },
+              onLeave: function(){
+                section.classList.remove('process-is-pinned');
+                showEverythingProcess();
+                activateStage(4);
+              },
+              onLeaveBack: function(){
+                section.classList.remove('process-is-pinned');
+              },
+
               onUpdate: function(self){
                 var progress = self.progress;
                 var stage = progress < 0.28 ? 1 : progress < 0.46 ? 2 : progress < 0.64 ? 3 : 4;
+
                 if(stage !== lastStage){
                   activateStage(stage);
                   lastStage = stage;
                 }
+
                 psItems.forEach(function(item, idx){
                   if(!item) return;
                   var threshold = 0.70 + idx * 0.055;
                   item.classList.toggle('ps-visible', progress >= threshold);
                 });
-                if(psFinal) psFinal.classList.toggle('ps-complete', progress >= 0.97);
+
+                if(psFinal){
+                  psFinal.classList.toggle('ps-complete', progress >= 0.97);
+                }
               }
             }
           });
@@ -8511,6 +8574,20 @@ window.addEventListener('load', function(){
       ScrollTrigger.refresh(true);
     });
   }
+});
+</script>
+
+
+<script id="meridian-process-trigger-guard">
+document.addEventListener('DOMContentLoaded', function(){
+  if (!window.ScrollTrigger) return;
+  ScrollTrigger.getAll().forEach(function(trigger){
+    if (trigger.vars && trigger.vars.id &&
+        trigger.vars.id !== 'meridian-process-stable' &&
+        String(trigger.vars.id).toLowerCase().indexOf('process') !== -1) {
+      trigger.kill(true);
+    }
+  });
 });
 </script>
 
