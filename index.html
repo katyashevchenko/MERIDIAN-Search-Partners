@@ -3979,6 +3979,954 @@ body{
   visibility:visible !important;
 }
 
+
+
+/* =========================================================
+   INSIGHTS — MERIDIAN EDITORIAL TETRIS GRID
+   Desktop:
+   - Large featured story on the left
+   - Wide secondary story on the right
+   - Two compact stories beneath
+   - Final horizontal story across the full width
+   Tablet:
+   - Featured and secondary stories full width
+   - Two compact stories side by side
+   - Final story full width
+   Mobile:
+   - Single-column editorial cards
+   ========================================================= */
+
+#insights .container{
+  max-width:1560px !important;
+}
+
+/* Replace the old expanding flex layout with a stable editorial grid */
+#insights .insights-grid{
+  display:grid !important;
+  grid-template-columns:repeat(12,minmax(0,1fr)) !important;
+  grid-template-rows:minmax(300px,auto) minmax(300px,auto) minmax(280px,auto) !important;
+  gap:24px !important;
+  align-items:stretch !important;
+}
+
+/* Reset the old active-card expansion system */
+#insights .insight-card,
+#insights .insight-card.active{
+  display:flex !important;
+  flex-direction:column !important;
+  min-width:0 !important;
+  min-height:0 !important;
+  height:100% !important;
+  flex:none !important;
+  background:rgba(19,24,32,.92) !important;
+  border:1px solid rgba(255,255,255,.08) !important;
+  border-radius:26px !important;
+  overflow:hidden !important;
+  transform:none;
+  transition:
+    transform 360ms var(--ease),
+    border-color 360ms var(--ease),
+    background 360ms var(--ease),
+    box-shadow 360ms var(--ease) !important;
+}
+
+/* Desktop Tetris placement */
+#insights .insight-card:nth-child(1){
+  grid-column:1 / span 6;
+  grid-row:1 / span 2;
+}
+
+#insights .insight-card:nth-child(2){
+  grid-column:7 / -1;
+  grid-row:1;
+  display:grid !important;
+  grid-template-columns:minmax(0,1.05fr) minmax(280px,.95fr) !important;
+}
+
+#insights .insight-card:nth-child(3){
+  grid-column:7 / span 3;
+  grid-row:2;
+}
+
+#insights .insight-card:nth-child(4){
+  grid-column:10 / span 3;
+  grid-row:2;
+}
+
+#insights .insight-card:nth-child(5){
+  grid-column:1 / -1;
+  grid-row:3;
+  display:grid !important;
+  grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr) !important;
+}
+
+/* Images */
+#insights .insight-img,
+#insights .insight-card.active .insight-img{
+  position:relative !important;
+  width:auto !important;
+  height:auto !important;
+  min-height:210px !important;
+  margin:10px 10px 0 !important;
+  border-radius:18px !important;
+  overflow:hidden !important;
+}
+
+#insights .insight-card:nth-child(1) .insight-img{
+  min-height:420px !important;
+}
+
+#insights .insight-card:nth-child(2) .insight-img,
+#insights .insight-card:nth-child(5) .insight-img{
+  height:calc(100% - 20px) !important;
+  min-height:260px !important;
+  margin:10px !important;
+}
+
+#insights .insight-img img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  transition:transform 700ms var(--ease), filter 500ms var(--ease) !important;
+}
+
+/* Editorial body */
+#insights .insight-body,
+#insights .insight-card.active .insight-body{
+  display:flex !important;
+  flex-direction:column !important;
+  flex:1 1 auto !important;
+  min-width:0 !important;
+  padding:24px 24px 26px !important;
+}
+
+#insights .insight-card:nth-child(1) .insight-body{
+  padding:30px 30px 32px !important;
+}
+
+#insights .insight-card:nth-child(2) .insight-body,
+#insights .insight-card:nth-child(5) .insight-body{
+  justify-content:center !important;
+  padding:32px !important;
+}
+
+/* Typography hierarchy */
+#insights .insight-card h3,
+#insights .insight-card.active h3{
+  margin-top:12px !important;
+  max-width:none !important;
+  font-family:'Inter',sans-serif !important;
+  font-size:clamp(18px,1.35vw,23px) !important;
+  font-weight:600 !important;
+  line-height:1.2 !important;
+}
+
+#insights .insight-card:nth-child(1) h3{
+  max-width:16ch !important;
+  font-family:'Newsreader',serif !important;
+  font-size:clamp(34px,3.3vw,52px) !important;
+  font-weight:400 !important;
+  line-height:1.08 !important;
+}
+
+#insights .insight-card:nth-child(2) h3,
+#insights .insight-card:nth-child(5) h3{
+  max-width:18ch !important;
+  font-family:'Newsreader',serif !important;
+  font-size:clamp(28px,2.5vw,40px) !important;
+  font-weight:400 !important;
+  line-height:1.1 !important;
+}
+
+#insights .insight-card:nth-child(3) h3,
+#insights .insight-card:nth-child(4) h3{
+  font-size:clamp(18px,1.45vw,22px) !important;
+}
+
+/* Featured badge belongs only to the lead story */
+#insights .featured-badge{
+  display:none !important;
+}
+
+#insights .insight-card:nth-child(1) .featured-badge{
+  display:inline-flex !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  transform:none !important;
+}
+
+/* Footer and article links */
+#insights .insight-footer{
+  margin-top:auto !important;
+  padding-top:24px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:16px !important;
+}
+
+#insights .insight-read-link,
+#insights .insight-card.active .insight-read-link{
+  display:flex !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
+  transform:none !important;
+}
+
+#insights .insight-card:nth-child(3) .insight-read-link,
+#insights .insight-card:nth-child(4) .insight-read-link{
+  opacity:0 !important;
+  transform:translateY(4px) !important;
+  transition:opacity 250ms var(--ease), transform 250ms var(--ease) !important;
+}
+
+/* Premium hover without rearranging the grid */
+@media (hover:hover) and (pointer:fine){
+  #insights .insights-grid:hover .insight-card:not(:hover){
+    opacity:.78;
+  }
+
+  #insights .insight-card{
+    transition:
+      transform 360ms var(--ease),
+      opacity 360ms var(--ease),
+      border-color 360ms var(--ease),
+      background 360ms var(--ease),
+      box-shadow 360ms var(--ease) !important;
+  }
+
+  #insights .insight-card:hover{
+    transform:translateY(-6px) !important;
+    border-color:rgba(200,155,99,.34) !important;
+    background:rgba(23,29,38,.98) !important;
+    box-shadow:0 24px 58px rgba(0,0,0,.34), 0 0 0 1px rgba(200,155,99,.06) !important;
+  }
+
+  #insights .insight-card:hover .insight-img img{
+    transform:scale(1.045) !important;
+  }
+
+  #insights .insight-card:nth-child(3):hover .insight-read-link,
+  #insights .insight-card:nth-child(4):hover .insight-read-link{
+    opacity:1 !important;
+    transform:none !important;
+  }
+}
+
+/* Old timeline is no longer part of the design */
+#insights .insights-loadbar{
+  display:none !important;
+}
+
+/* Large tablet and small desktop */
+@media (min-width:761px) and (max-width:1100px){
+  #insights .insights-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    grid-template-rows:auto !important;
+    gap:22px !important;
+  }
+
+  #insights .insight-card,
+  #insights .insight-card:nth-child(1),
+  #insights .insight-card:nth-child(2),
+  #insights .insight-card:nth-child(3),
+  #insights .insight-card:nth-child(4),
+  #insights .insight-card:nth-child(5){
+    grid-column:auto !important;
+    grid-row:auto !important;
+    display:flex !important;
+    flex-direction:column !important;
+  }
+
+  #insights .insight-card:nth-child(1),
+  #insights .insight-card:nth-child(2),
+  #insights .insight-card:nth-child(5){
+    grid-column:1 / -1 !important;
+  }
+
+  #insights .insight-card:nth-child(1) .insight-img{
+    min-height:390px !important;
+  }
+
+  #insights .insight-card:nth-child(2) .insight-img,
+  #insights .insight-card:nth-child(5) .insight-img{
+    height:auto !important;
+    min-height:300px !important;
+    margin:10px 10px 0 !important;
+  }
+
+  #insights .insight-card:nth-child(3) .insight-img,
+  #insights .insight-card:nth-child(4) .insight-img{
+    min-height:240px !important;
+  }
+
+  #insights .insight-card:nth-child(2) h3,
+  #insights .insight-card:nth-child(5) h3{
+    max-width:20ch !important;
+  }
+
+  #insights .insight-card:nth-child(3) .insight-read-link,
+  #insights .insight-card:nth-child(4) .insight-read-link{
+    opacity:1 !important;
+    transform:none !important;
+  }
+}
+
+/* Mobile editorial stack */
+@media (max-width:760px){
+  #insights .insights-grid{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    grid-template-rows:auto !important;
+    gap:18px !important;
+  }
+
+  #insights .insight-card,
+  #insights .insight-card:nth-child(1),
+  #insights .insight-card:nth-child(2),
+  #insights .insight-card:nth-child(3),
+  #insights .insight-card:nth-child(4),
+  #insights .insight-card:nth-child(5){
+    grid-column:auto !important;
+    grid-row:auto !important;
+    display:flex !important;
+    flex-direction:column !important;
+    border-radius:22px !important;
+  }
+
+  #insights .insight-img,
+  #insights .insight-card.active .insight-img,
+  #insights .insight-card:nth-child(1) .insight-img,
+  #insights .insight-card:nth-child(2) .insight-img,
+  #insights .insight-card:nth-child(3) .insight-img,
+  #insights .insight-card:nth-child(4) .insight-img,
+  #insights .insight-card:nth-child(5) .insight-img{
+    width:auto !important;
+    height:auto !important;
+    min-height:220px !important;
+    margin:8px 8px 0 !important;
+  }
+
+  #insights .insight-body,
+  #insights .insight-card.active .insight-body,
+  #insights .insight-card:nth-child(1) .insight-body,
+  #insights .insight-card:nth-child(2) .insight-body,
+  #insights .insight-card:nth-child(5) .insight-body{
+    padding:22px !important;
+  }
+
+  #insights .insight-card h3,
+  #insights .insight-card.active h3,
+  #insights .insight-card:nth-child(1) h3,
+  #insights .insight-card:nth-child(2) h3,
+  #insights .insight-card:nth-child(5) h3{
+    max-width:none !important;
+    font-family:'Newsreader',serif !important;
+    font-size:clamp(25px,7.8vw,34px) !important;
+    font-weight:400 !important;
+    line-height:1.12 !important;
+  }
+
+  #insights .insight-read-link,
+  #insights .insight-card:nth-child(3) .insight-read-link,
+  #insights .insight-card:nth-child(4) .insight-read-link{
+    opacity:1 !important;
+    visibility:visible !important;
+    transform:none !important;
+  }
+}
+
+@media (max-width:420px){
+  #insights .insight-img,
+  #insights .insight-card:nth-child(1) .insight-img,
+  #insights .insight-card:nth-child(2) .insight-img,
+  #insights .insight-card:nth-child(3) .insight-img,
+  #insights .insight-card:nth-child(4) .insight-img,
+  #insights .insight-card:nth-child(5) .insight-img{
+    min-height:190px !important;
+  }
+
+  #insights .insight-footer{
+    align-items:flex-start !important;
+    flex-direction:column !important;
+    gap:12px !important;
+  }
+}
+
+
+
+/* =========================================================
+   INSIGHTS — MORE DISTINCTIVE TABLET + MOBILE LAYOUTS
+   Tablet:
+   - Featured card full width
+   - Two-card asymmetric editorial row
+   - Wide horizontal fifth story
+   Mobile:
+   - Featured card full width
+   - Horizontal snap rail for stories 2–4
+   - Final story as a full-width horizontal feature
+   ========================================================= */
+
+/* ---------- Tablet: editorial asymmetry ---------- */
+@media (min-width:761px) and (max-width:1100px){
+  #insights .insights-grid{
+    display:grid !important;
+    grid-template-columns:repeat(12,minmax(0,1fr)) !important;
+    grid-auto-rows:auto !important;
+    gap:22px !important;
+  }
+
+  #insights .insight-card:nth-child(1){
+    grid-column:1 / -1 !important;
+    grid-row:auto !important;
+    display:grid !important;
+    grid-template-columns:minmax(0,1.18fr) minmax(300px,.82fr) !important;
+    min-height:430px !important;
+  }
+
+  #insights .insight-card:nth-child(2){
+    grid-column:1 / span 7 !important;
+    grid-row:auto !important;
+    display:flex !important;
+    flex-direction:column !important;
+  }
+
+  #insights .insight-card:nth-child(3){
+    grid-column:8 / -1 !important;
+    grid-row:auto !important;
+  }
+
+  #insights .insight-card:nth-child(4){
+    grid-column:1 / span 5 !important;
+    grid-row:auto !important;
+  }
+
+  #insights .insight-card:nth-child(5){
+    grid-column:6 / -1 !important;
+    grid-row:auto !important;
+    display:grid !important;
+    grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr) !important;
+  }
+
+  #insights .insight-card:nth-child(1) .insight-img{
+    height:calc(100% - 20px) !important;
+    min-height:410px !important;
+    margin:10px !important;
+  }
+
+  #insights .insight-card:nth-child(1) .insight-body{
+    justify-content:center !important;
+    padding:34px !important;
+  }
+
+  #insights .insight-card:nth-child(2) .insight-img,
+  #insights .insight-card:nth-child(3) .insight-img,
+  #insights .insight-card:nth-child(4) .insight-img{
+    min-height:250px !important;
+  }
+
+  #insights .insight-card:nth-child(5) .insight-img{
+    height:calc(100% - 20px) !important;
+    min-height:280px !important;
+    margin:10px !important;
+  }
+
+  #insights .insight-card:nth-child(5) .insight-body{
+    justify-content:center !important;
+  }
+
+  #insights .insight-card:nth-child(2) h3{
+    max-width:20ch !important;
+    font-family:'Newsreader',serif !important;
+    font-size:clamp(28px,4vw,38px) !important;
+    font-weight:400 !important;
+    line-height:1.1 !important;
+  }
+
+  #insights .insight-card:nth-child(3) h3,
+  #insights .insight-card:nth-child(4) h3{
+    font-size:clamp(19px,2.4vw,24px) !important;
+  }
+}
+
+/* ---------- Mobile: editorial stack + swipe rail ---------- */
+@media (max-width:760px){
+  #insights .insights-grid{
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(82vw,1fr)) !important;
+    grid-auto-flow:column !important;
+    grid-auto-columns:minmax(82vw,1fr) !important;
+    overflow-x:auto !important;
+    overflow-y:visible !important;
+    gap:14px !important;
+    padding:0 20px 12px !important;
+    margin-inline:-20px !important;
+    scroll-snap-type:x mandatory !important;
+    scroll-padding-inline:20px !important;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+
+  #insights .insights-grid::-webkit-scrollbar{
+    display:none;
+  }
+
+  #insights .insight-card,
+  #insights .insight-card:nth-child(1),
+  #insights .insight-card:nth-child(2),
+  #insights .insight-card:nth-child(3),
+  #insights .insight-card:nth-child(4),
+  #insights .insight-card:nth-child(5){
+    grid-column:auto !important;
+    grid-row:auto !important;
+    width:auto !important;
+    min-width:82vw !important;
+    max-width:82vw !important;
+    scroll-snap-align:start !important;
+    display:flex !important;
+    flex-direction:column !important;
+  }
+
+  /* Lead story is intentionally wider and more editorial */
+  #insights .insight-card:nth-child(1){
+    min-width:88vw !important;
+    max-width:88vw !important;
+  }
+
+  /* Final story also gets a wider visual ending */
+  #insights .insight-card:nth-child(5){
+    min-width:88vw !important;
+    max-width:88vw !important;
+  }
+
+  #insights .insight-img,
+  #insights .insight-card.active .insight-img,
+  #insights .insight-card:nth-child(1) .insight-img,
+  #insights .insight-card:nth-child(2) .insight-img,
+  #insights .insight-card:nth-child(3) .insight-img,
+  #insights .insight-card:nth-child(4) .insight-img,
+  #insights .insight-card:nth-child(5) .insight-img{
+    min-height:230px !important;
+  }
+
+  #insights .insight-card:nth-child(1) .insight-img{
+    min-height:300px !important;
+  }
+
+  #insights .insight-card:nth-child(5) .insight-img{
+    min-height:260px !important;
+  }
+
+  #insights .insight-card h3,
+  #insights .insight-card.active h3,
+  #insights .insight-card:nth-child(1) h3,
+  #insights .insight-card:nth-child(2) h3,
+  #insights .insight-card:nth-child(5) h3{
+    font-size:clamp(25px,8vw,34px) !important;
+  }
+
+  /* Small visual cue that the row is swipeable */
+  #insights .insights-grid::after{
+    content:"Swipe to explore →";
+    align-self:end;
+    min-width:140px;
+    color:rgba(245,245,244,.52);
+    font-size:12px;
+    letter-spacing:.04em;
+    padding:0 20px 18px 4px;
+  }
+}
+
+/* Very small screens */
+@media (max-width:420px){
+  #insights .insights-grid{
+    grid-template-columns:repeat(3,minmax(86vw,1fr)) !important;
+    grid-auto-columns:minmax(86vw,1fr) !important;
+  }
+
+  #insights .insight-card,
+  #insights .insight-card:nth-child(2),
+  #insights .insight-card:nth-child(3),
+  #insights .insight-card:nth-child(4){
+    min-width:86vw !important;
+    max-width:86vw !important;
+  }
+
+  #insights .insight-card:nth-child(1),
+  #insights .insight-card:nth-child(5){
+    min-width:90vw !important;
+    max-width:90vw !important;
+  }
+}
+
+
+
+/* =========================================================
+   MOBILE INSIGHTS SWIPE — GAP + OVERFLOW FIX
+   Fixes card overlap/cropping and keeps a clean 24px rhythm.
+   ========================================================= */
+
+@media (max-width:760px){
+  #insights{
+    overflow:hidden !important;
+  }
+
+  #insights .container{
+    overflow:visible !important;
+  }
+
+  #insights .insights-grid{
+    gap:24px !important;
+    padding:10px 20px 20px !important;
+    margin-inline:-20px !important;
+    overflow-x:auto !important;
+    overflow-y:visible !important;
+    align-items:stretch !important;
+    scroll-padding-inline:20px !important;
+  }
+
+  #insights .insight-card,
+  #insights .insight-card:nth-child(1),
+  #insights .insight-card:nth-child(2),
+  #insights .insight-card:nth-child(3),
+  #insights .insight-card:nth-child(4),
+  #insights .insight-card:nth-child(5){
+    position:relative !important;
+    z-index:1 !important;
+    margin:0 !important;
+    transform:none !important;
+    overflow:hidden !important;
+    box-shadow:none !important;
+    scroll-snap-stop:always !important;
+  }
+
+  #insights .insight-card:hover{
+    transform:none !important;
+  }
+
+  #insights .insight-card::before,
+  #insights .insight-card::after{
+    pointer-events:none !important;
+  }
+
+  #insights .insight-img,
+  #insights .insight-card.active .insight-img,
+  #insights .insight-card:nth-child(1) .insight-img,
+  #insights .insight-card:nth-child(2) .insight-img,
+  #insights .insight-card:nth-child(3) .insight-img,
+  #insights .insight-card:nth-child(4) .insight-img,
+  #insights .insight-card:nth-child(5) .insight-img{
+    margin:10px 10px 0 !important;
+    border-radius:18px !important;
+    overflow:hidden !important;
+  }
+
+  #insights .insight-body,
+  #insights .insight-card.active .insight-body,
+  #insights .insight-card:nth-child(1) .insight-body,
+  #insights .insight-card:nth-child(2) .insight-body,
+  #insights .insight-card:nth-child(3) .insight-body,
+  #insights .insight-card:nth-child(4) .insight-body,
+  #insights .insight-card:nth-child(5) .insight-body{
+    min-width:0 !important;
+    padding:22px !important;
+  }
+
+  #insights .insight-card h3,
+  #insights .insight-card.active h3,
+  #insights .insight-card:nth-child(1) h3,
+  #insights .insight-card:nth-child(2) h3,
+  #insights .insight-card:nth-child(3) h3,
+  #insights .insight-card:nth-child(4) h3,
+  #insights .insight-card:nth-child(5) h3{
+    max-width:100% !important;
+    overflow-wrap:anywhere !important;
+  }
+
+  #insights .featured-badge{
+    top:18px !important;
+    left:18px !important;
+    max-width:calc(100% - 36px) !important;
+  }
+
+  #insights .insight-footer{
+    width:100% !important;
+    min-width:0 !important;
+  }
+
+  #insights .insight-read-link{
+    flex-shrink:0 !important;
+  }
+}
+
+@media (max-width:420px){
+  #insights .insights-grid{
+    gap:24px !important;
+    padding-top:8px !important;
+  }
+
+  #insights .insight-card,
+  #insights .insight-card:nth-child(1),
+  #insights .insight-card:nth-child(2),
+  #insights .insight-card:nth-child(3),
+  #insights .insight-card:nth-child(4),
+  #insights .insight-card:nth-child(5){
+    min-width:86vw !important;
+    max-width:86vw !important;
+  }
+
+  #insights .insight-card:nth-child(1),
+  #insights .insight-card:nth-child(5){
+    min-width:88vw !important;
+    max-width:88vw !important;
+  }
+}
+
+
+
+/* =========================================================
+   MOBILE INSIGHTS — ANIMATED SWIPE CURSOR + TRUE 24PX GAP
+   ========================================================= */
+
+.insights-swipe-cue{
+  display:none;
+}
+
+@media (max-width:760px){
+  /* Remove the old text prompt that was generated as a grid item */
+  #insights .insights-grid::after{
+    display:none !important;
+    content:none !important;
+  }
+
+  /* Use one consistent horizontal track. Explicit column-gap prevents
+     the first and second cards from visually touching. */
+  #insights .insights-grid{
+    display:grid !important;
+    grid-auto-flow:column !important;
+    grid-template-columns:none !important;
+    grid-auto-columns:82vw !important;
+    column-gap:24px !important;
+    row-gap:0 !important;
+    padding:12px 20px 22px !important;
+    margin:0 -20px !important;
+    scroll-padding-left:20px !important;
+    scroll-padding-right:20px !important;
+  }
+
+  #insights .insight-card,
+  #insights .insight-card:nth-child(1),
+  #insights .insight-card:nth-child(2),
+  #insights .insight-card:nth-child(3),
+  #insights .insight-card:nth-child(4),
+  #insights .insight-card:nth-child(5){
+    width:82vw !important;
+    min-width:82vw !important;
+    max-width:82vw !important;
+    margin:0 !important;
+  }
+
+  #insights .insight-card:nth-child(1),
+  #insights .insight-card:nth-child(5){
+    width:86vw !important;
+    min-width:86vw !important;
+    max-width:86vw !important;
+  }
+
+  /* Dedicated cue below the cards, so it never participates in the grid */
+  .insights-swipe-cue{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:44px;
+    margin-top:8px;
+  }
+
+  .swipe-cue-track{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    color:rgba(245,245,244,.52);
+  }
+
+  .swipe-cue-arrow{
+    font-size:15px;
+    line-height:1;
+    opacity:.42;
+    animation:swipe-arrow-pulse 1.8s ease-in-out infinite;
+  }
+
+  .swipe-cue-arrow-right{
+    animation-delay:.18s;
+  }
+
+  .swipe-cue-cursor{
+    width:34px;
+    height:34px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid rgba(200,155,99,.34);
+    border-radius:50%;
+    color:var(--accent-hover);
+    background:rgba(200,155,99,.07);
+    animation:swipe-cursor-move 1.8s cubic-bezier(.4,0,.2,1) infinite;
+  }
+
+  .swipe-cue-cursor svg{
+    width:18px;
+    height:18px;
+  }
+}
+
+@keyframes swipe-cursor-move{
+  0%,100%{transform:translateX(-8px);}
+  50%{transform:translateX(8px);}
+}
+
+@keyframes swipe-arrow-pulse{
+  0%,100%{opacity:.28;}
+  50%{opacity:.72;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .swipe-cue-cursor,
+  .swipe-cue-arrow{
+    animation:none !important;
+  }
+}
+
+@media (max-width:420px){
+  #insights .insights-grid{
+    grid-auto-columns:84vw !important;
+    column-gap:24px !important;
+  }
+
+  #insights .insight-card,
+  #insights .insight-card:nth-child(1),
+  #insights .insight-card:nth-child(2),
+  #insights .insight-card:nth-child(3),
+  #insights .insight-card:nth-child(4),
+  #insights .insight-card:nth-child(5){
+    width:84vw !important;
+    min-width:84vw !important;
+    max-width:84vw !important;
+  }
+
+  #insights .insight-card:nth-child(1),
+  #insights .insight-card:nth-child(5){
+    width:88vw !important;
+    min-width:88vw !important;
+    max-width:88vw !important;
+  }
+}
+
+
+
+/* =========================================================
+   FINAL MOBILE INSIGHTS GAP FIX
+   Flex track guarantees a real 24px space between card 1 and 2.
+   ========================================================= */
+
+@media (max-width:760px){
+  #insights .insights-grid{
+    display:flex !important;
+    flex-direction:row !important;
+    flex-wrap:nowrap !important;
+    align-items:stretch !important;
+    gap:24px !important;
+    column-gap:24px !important;
+    row-gap:0 !important;
+
+    width:auto !important;
+    max-width:none !important;
+    overflow-x:auto !important;
+    overflow-y:visible !important;
+
+    padding:12px 20px 22px !important;
+    margin-left:-20px !important;
+    margin-right:-20px !important;
+
+    scroll-snap-type:x mandatory !important;
+    scroll-padding-left:20px !important;
+    scroll-padding-right:20px !important;
+
+    -webkit-overflow-scrolling:touch !important;
+    scrollbar-width:none !important;
+  }
+
+  #insights .insights-grid::-webkit-scrollbar{
+    display:none !important;
+  }
+
+  #insights .insight-card,
+  #insights .insight-card.active,
+  #insights .insight-card:nth-child(1),
+  #insights .insight-card:nth-child(2),
+  #insights .insight-card:nth-child(3),
+  #insights .insight-card:nth-child(4),
+  #insights .insight-card:nth-child(5){
+    display:flex !important;
+    flex-direction:column !important;
+
+    flex:0 0 82vw !important;
+    width:82vw !important;
+    min-width:82vw !important;
+    max-width:82vw !important;
+
+    grid-column:auto !important;
+    grid-row:auto !important;
+
+    margin:0 !important;
+    position:relative !important;
+    scroll-snap-align:start !important;
+    scroll-snap-stop:always !important;
+    transform:none !important;
+  }
+
+  /* Keep the lead and closing cards slightly wider without affecting the gap */
+  #insights .insight-card:nth-child(1),
+  #insights .insight-card:nth-child(5){
+    flex-basis:86vw !important;
+    width:86vw !important;
+    min-width:86vw !important;
+    max-width:86vw !important;
+  }
+
+  /* Extra safeguard: no card may pull toward the previous card */
+  #insights .insight-card + .insight-card{
+    margin-left:0 !important;
+  }
+}
+
+@media (max-width:420px){
+  #insights .insights-grid{
+    gap:24px !important;
+    column-gap:24px !important;
+  }
+
+  #insights .insight-card,
+  #insights .insight-card.active,
+  #insights .insight-card:nth-child(2),
+  #insights .insight-card:nth-child(3),
+  #insights .insight-card:nth-child(4){
+    flex-basis:84vw !important;
+    width:84vw !important;
+    min-width:84vw !important;
+    max-width:84vw !important;
+  }
+
+  #insights .insight-card:nth-child(1),
+  #insights .insight-card:nth-child(5){
+    flex-basis:88vw !important;
+    width:88vw !important;
+    min-width:88vw !important;
+    max-width:88vw !important;
+  }
+}
+
 </style>
 
 </head>
@@ -4570,8 +5518,20 @@ body{
           </div>
         </a>
       </div>
-      <div class="insights-loadbar" id="insights-loadbar">
-        <span class="loaded"></span><span></span><span></span><span></span><span></span>
+
+      <div class="insights-swipe-cue" aria-hidden="true">
+        <span class="swipe-cue-track">
+          <span class="swipe-cue-arrow swipe-cue-arrow-left">←</span>
+          <span class="swipe-cue-cursor">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 3.5V13"/>
+              <path d="M11 7.5V13"/>
+              <path d="M14 8.5V13"/>
+              <path d="M17 10V15.5c0 3-2 5-5 5h-1.5c-2 0-3.4-.8-4.5-2.4L3.8 15c-.6-.9-.4-2 .4-2.6.8-.6 1.9-.4 2.5.3L8 14.2"/>
+            </svg>
+          </span>
+          <span class="swipe-cue-arrow swipe-cue-arrow-right">→</span>
+        </span>
       </div>
     </div>
   </section>
@@ -5598,6 +6558,39 @@ body{
       padding-right:20px;
     }
   }
+
+
+/* =========================================================
+   MOBILE CARD H3 — UNIFIED TYPOGRAPHY
+   Applies one consistent style to every h3 inside card components
+   on mobile devices, including all Insights cards.
+   ========================================================= */
+
+@media (max-width:760px){
+  .card h3,
+  .case-card h3,
+  .team-card h3,
+  .exp-card h3,
+  .insight-card h3,
+  .insight-card.active h3,
+  .role-metric h3,
+  .role-detail h3,
+  #insights .insight-card h3,
+  #insights .insight-card.active h3,
+  #insights .insight-card:nth-child(1) h3,
+  #insights .insight-card:nth-child(2) h3,
+  #insights .insight-card:nth-child(3) h3,
+  #insights .insight-card:nth-child(4) h3,
+  #insights .insight-card:nth-child(5) h3{
+    max-width:none !important;
+    font-family:'Newsreader',serif !important;
+    font-size:30px !important;
+    font-weight:400 !important;
+    line-height:1.15 !important;
+    letter-spacing:-0.02em !important;
+  }
+}
+
 </style>
 
 <script>
