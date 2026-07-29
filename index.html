@@ -7598,8 +7598,12 @@ body{
         if(psFinal) psFinal.classList.add('ps-complete');
       }
 
+      /* Restored scroll animation without pinning.
+         This preserves the original staged animation while preventing
+         the blank pinned screen caused by conflicting layout overrides. */
       if(reduceMotionProcess || !window.gsap || !window.ScrollTrigger){
         showEverythingProcess();
+        activateStage(4);
         return;
       }
 
@@ -7615,11 +7619,11 @@ body{
           var tl = gsap.timeline({
             scrollTrigger: {
               trigger: '#process',
-              start: 'top top',
-              end: '+=150%',
-              scrub: 1,
-              pin: true,
-              anticipatePin: 1,
+              start: 'top 72%',
+              end: 'bottom 28%',
+              scrub: 0.8,
+              pin: false,
+              invalidateOnRefresh: true,
               onUpdate: function(self){
                 var progress = self.progress;
                 var stage = progress < 0.28 ? 1 : progress < 0.46 ? 2 : progress < 0.64 ? 3 : 4;
@@ -8497,6 +8501,17 @@ window.addEventListener('load', function(){
     section.insertBefore(glow, section.firstChild);
   });
 })();
+</script>
+
+
+<script id="meridian-process-refresh-fix">
+window.addEventListener('load', function(){
+  if(window.ScrollTrigger){
+    requestAnimationFrame(function(){
+      ScrollTrigger.refresh(true);
+    });
+  }
+});
 </script>
 
 </body>
