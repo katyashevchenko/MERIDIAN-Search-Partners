@@ -2978,6 +2978,338 @@ p{
   }
 }
 
+
+
+/* =========================================================
+   SOFT SECTION TRANSITIONS
+   Removes hard visual cuts and blends neighboring dark sections.
+   ========================================================= */
+
+.section,
+#roles,
+#process,
+#track,
+#team,
+#insights,
+.trusted-stats{
+  position:relative;
+  isolation:isolate;
+}
+
+/* Remove hard section borders that create visible horizontal cuts */
+#roles,
+#process,
+#track,
+#team,
+#insights{
+  border-top:none !important;
+  border-bottom:none !important;
+}
+
+/* Soft top and bottom blending layers */
+.section::before,
+.section::after,
+#roles::before,
+#roles::after,
+.trusted-stats::before,
+.trusted-stats::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  height:clamp(56px,7vw,110px);
+  pointer-events:none;
+  z-index:0;
+}
+
+.section::before,
+#roles::before,
+.trusted-stats::before{
+  top:0;
+  transform:translateY(-1px);
+  background:linear-gradient(
+    180deg,
+    rgba(9,11,15,.42) 0%,
+    rgba(9,11,15,.18) 38%,
+    rgba(9,11,15,0) 100%
+  );
+}
+
+.section::after,
+#roles::after,
+.trusted-stats::after{
+  bottom:0;
+  transform:translateY(1px);
+  background:linear-gradient(
+    180deg,
+    rgba(9,11,15,0) 0%,
+    rgba(9,11,15,.14) 58%,
+    rgba(9,11,15,.34) 100%
+  );
+}
+
+/* Keep section content above the blend layers */
+.section > .container,
+#roles > .container,
+.trusted-stats > .container{
+  position:relative;
+  z-index:1;
+}
+
+/* Specific color blending between the main dark sections */
+#track{
+  background:
+    linear-gradient(180deg, #090B0F 0%, #0B0F14 10%, #0D1117 100%) !important;
+}
+
+#team{
+  background:
+    linear-gradient(180deg, #0D1117 0%, #10151B 16%, #10141A 100%) !important;
+}
+
+#insights{
+  background:
+    linear-gradient(180deg, #10141A 0%, #0D1117 14%, #090B0F 100%) !important;
+}
+
+#process{
+  background:
+    linear-gradient(180deg, #10141A 0%, #0D1117 12%, #090B0F 100%) !important;
+}
+
+#roles{
+  background:
+    linear-gradient(180deg, #10141A 0%, #0E1319 14%, #10141A 100%) !important;
+}
+
+/* Slight overlap to hide 1px rendering seams */
+#track,
+#team,
+#insights,
+#process,
+#roles{
+  margin-top:-1px;
+}
+
+/* Blend cards/section content more naturally into the background */
+.case-card,
+.team-card,
+.insight-card,
+.role-panel{
+  box-shadow:
+    0 18px 44px rgba(0,0,0,.16),
+    inset 0 1px 0 rgba(255,255,255,.015);
+}
+
+/* Tablet and mobile: shorter blends so transitions stay subtle */
+@media (max-width:991px){
+  .section::before,
+  .section::after,
+  #roles::before,
+  #roles::after,
+  .trusted-stats::before,
+  .trusted-stats::after{
+    height:72px;
+  }
+}
+
+@media (max-width:600px){
+  .section::before,
+  .section::after,
+  #roles::before,
+  #roles::after,
+  .trusted-stats::before,
+  .trusted-stats::after{
+    height:52px;
+  }
+}
+
+
+
+/* =========================================================
+   FINAL SEAMLESS SECTION FLOW
+   Use one continuous background instead of separate section blends.
+   ========================================================= */
+
+/* Continuous page background */
+body{
+  background:#0D1117 !important;
+}
+
+/* Main content sections use the exact same background */
+#roles,
+#process,
+#track,
+#team,
+#insights,
+#expertise,
+.trusted-stats{
+  background:#0D1117 !important;
+  border:none !important;
+  box-shadow:none !important;
+  margin-top:0 !important;
+}
+
+/* Remove all artificial transition overlays */
+.section::before,
+.section::after,
+#roles::before,
+#roles::after,
+.trusted-stats::before,
+.trusted-stats::after{
+  display:none !important;
+  content:none !important;
+}
+
+/* Remove any 1px separators created by section boundaries */
+#roles,
+#process,
+#track,
+#team,
+#insights,
+#expertise,
+.trusted-stats{
+  outline:none !important;
+}
+
+/* Keep subtle distinction through content, not section background */
+#roles .role-panel,
+#track .case-card,
+#team .team-card,
+#insights .insight-card{
+  background:rgba(19,24,32,.88) !important;
+}
+
+/* Slightly softer spacing rhythm between neighboring sections */
+#track,
+#team,
+#insights{
+  padding-top:clamp(96px,8vw,128px) !important;
+  padding-bottom:clamp(96px,8vw,128px) !important;
+}
+
+/* Hide rendering seams caused by subpixel layout */
+#roles + #process,
+#process + #track,
+#track + #team,
+#team + #insights{
+  margin-top:-2px !important;
+  padding-top:calc(var(--section-space) + 2px) !important;
+}
+
+@media (max-width:991px){
+  #track,
+  #team,
+  #insights{
+    padding-top:96px !important;
+    padding-bottom:96px !important;
+  }
+}
+
+@media (max-width:600px){
+  #track,
+  #team,
+  #insights{
+    padding-top:72px !important;
+    padding-bottom:72px !important;
+  }
+}
+
+
+
+/* =========================================================
+   RESTORE HERO → TRUSTED PHOTO TRANSITION
+   The hero image continues behind the Trusted section and
+   gradually fades into the unified dark page background.
+   ========================================================= */
+
+.hero-photo-wrap{
+  position:relative !important;
+  overflow:hidden !important;
+  background:#0D1117 !important;
+}
+
+/* Keep the hero photograph stretched across the full wrapper,
+   including the Trusted by boards and leaders section */
+.hero-photo-wrap > .hero-bg{
+  position:absolute !important;
+  inset:0 !important;
+  z-index:0 !important;
+}
+
+.hero-photo-wrap > .hero-bg img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:center top !important;
+}
+
+/* Long, soft fade from the photograph into the page background */
+.hero-photo-wrap > .hero-bg::after{
+  content:"" !important;
+  display:block !important;
+  position:absolute !important;
+  inset:0 !important;
+  pointer-events:none !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(9,11,15,0) 0%,
+      rgba(9,11,15,0) 45%,
+      rgba(9,11,15,.10) 58%,
+      rgba(9,11,15,.34) 70%,
+      rgba(9,11,15,.72) 84%,
+      #0D1117 100%
+    ) !important;
+}
+
+/* Trusted section must stay transparent so the photo is visible */
+.hero-photo-wrap .trusted-stats,
+#trusted-stats{
+  position:relative !important;
+  z-index:2 !important;
+  background:transparent !important;
+}
+
+/* Hero content remains above the shared background */
+.hero-photo-wrap .hero{
+  position:relative !important;
+  z-index:1 !important;
+}
+
+/* Preserve the gradual fade on tablet and mobile */
+@media (max-width:991px){
+  .hero-photo-wrap > .hero-bg::after{
+    background:
+      linear-gradient(
+        180deg,
+        rgba(9,11,15,0) 0%,
+        rgba(9,11,15,.04) 42%,
+        rgba(9,11,15,.24) 58%,
+        rgba(9,11,15,.66) 78%,
+        #0D1117 100%
+      ) !important;
+  }
+}
+
+@media (max-width:600px){
+  .hero-photo-wrap > .hero-bg img{
+    object-position:58% top !important;
+  }
+
+  .hero-photo-wrap > .hero-bg::after{
+    background:
+      linear-gradient(
+        180deg,
+        rgba(9,11,15,.02) 0%,
+        rgba(9,11,15,.12) 38%,
+        rgba(9,11,15,.42) 58%,
+        rgba(9,11,15,.82) 78%,
+        #0D1117 100%
+      ) !important;
+  }
+}
+
 </style>
 
 </head>
