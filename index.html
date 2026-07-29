@@ -6452,6 +6452,96 @@ body{
   #expertise::before{height:130px !important;}
 }
 </style>
+
+<style id="meridian-nav-text-animation-final">
+/* Final correction: the footer-style coordinate animation belongs to the
+   MERIDIAN text, while the circular M icon stays static. */
+.nav .brand-mark{
+  animation:none !important;
+  background-position:42% 50%,0 0,0 0,0 0 !important;
+}
+.nav .brand-mark::after{
+  display:none !important;
+  animation:none !important;
+}
+
+.nav .brand-text{
+  position:relative !important;
+  isolation:isolate !important;
+  overflow:visible !important;
+  color:transparent !important;
+  -webkit-text-fill-color:transparent !important;
+  -webkit-text-stroke:.45px rgba(245,245,244,.22) !important;
+  background-image:
+    radial-gradient(
+      ellipse 24% 150% at 18% 50%,
+      rgba(255,255,255,.48) 0%,
+      rgba(215,174,124,.24) 22%,
+      rgba(255,255,255,.07) 48%,
+      transparent 72%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(215,174,124,.20) 0 1px,
+      transparent 1px 18px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(245,245,244,.09) 0 1px,
+      transparent 1px 8px
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.98) 0%,
+      rgba(245,245,244,.60) 48%,
+      rgba(200,155,99,.46) 100%
+    ) !important;
+  background-size:180% 100%,100% 100%,100% 100%,100% 100% !important;
+  background-position:-72% 50%,-18px 0,0 -4px,0 0 !important;
+  -webkit-background-clip:text !important;
+  background-clip:text !important;
+  filter:drop-shadow(0 0 12px rgba(200,155,99,.07));
+  animation:
+    nav-meridian-text-drift 12s cubic-bezier(.45,.05,.55,.95) infinite alternate,
+    nav-meridian-text-breathe 7s ease-in-out infinite !important;
+}
+
+/* The subtitle remains readable and does not inherit the animated fill. */
+.nav .brand-text small{
+  position:relative;
+  z-index:3;
+  color:rgba(245,245,244,.58) !important;
+  -webkit-text-fill-color:rgba(245,245,244,.58) !important;
+  -webkit-text-stroke:0 !important;
+  background:none !important;
+  animation:none !important;
+}
+
+@keyframes nav-meridian-text-drift{
+  0%{background-position:-72% 50%,-18px 0,0 -4px,0 0;}
+  50%{background-position:48% 50%,8px 0,0 4px,0 0;}
+  100%{background-position:170% 50%,34px 0,0 12px,0 0;}
+}
+
+@keyframes nav-meridian-text-breathe{
+  0%,100%{
+    -webkit-text-stroke-color:rgba(245,245,244,.18);
+    filter:drop-shadow(0 0 10px rgba(200,155,99,.05));
+  }
+  50%{
+    -webkit-text-stroke-color:rgba(245,245,244,.30);
+    filter:drop-shadow(0 0 18px rgba(200,155,99,.13));
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .nav .brand-text{
+    animation:none !important;
+    background-position:42% 50%,0 0,0 0,0 0 !important;
+  }
+}
+</style>
+
 </head>
 <body class="loading">
   <div class="page-loader" id="page-loader"><span class="page-loader-mark">M</span></div>
